@@ -10,6 +10,8 @@ data = pd.read_csv(r'./athlete_events.csv')
 worldPop = pd.read_csv(r'./world_population.csv')
 
 
+#Remove all sports that are not currently run
+
 data = data.drop(data[data['Sport'] == 'Tug-Of-War'].index)
 data = data.drop(data[data['Sport'] == 'Art Competitions'].index)
 data = data.drop(data[data['Sport'] == 'Alpne Skiing'].index)
@@ -30,22 +32,14 @@ data = data.drop(data[data['Sport'] == 'Water Motorsports'].index)
 
 
 
-
-
-#drop all years
-
-#data = data.query("Sport == 'Swimming'")
-                #| Sport == 'Sailing'  | Sport == 'Water Polo'  | Sport == 'Rowing'  | Sport == 'Diving' | Sport == 'Canoeing'  | Sport == 'Synchronized Swimming'  | Sport == 'Motorboating'")      
-
 current_sports = data['Sport'].unique()
-#print(data.columns)
 
 
+#cleaning data
 data = data.dropna(subset=['Age'])
 data = data.dropna(subset=['Medal'])
 #drop winter
 data = data.drop(data[data['Season'] == 'Winter'].index)
-#data = data.drop(data[data['Sex'] != 'F'].index)
 
 
 data_current_sports = data[data['Sport'].isin(current_sports)]
@@ -78,6 +72,4 @@ plt.ylabel('Average Age')
 plt.legend()
 plt.tight_layout()
 plt.show()
-
-#print average age over time for each sport
 # %%

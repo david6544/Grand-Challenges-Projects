@@ -9,6 +9,7 @@ from scipy.stats import linregress
 data = pd.read_csv(r'./athlete_events.csv')
 worldPop = pd.read_csv(r'./world_population.csv')
 
+#Remove all sports that are not currently run
 
 data = data.drop(data[data['Sport'] == 'Tug-Of-War'].index)
 data = data.drop(data[data['Sport'] == 'Art Competitions'].index)
@@ -30,15 +31,13 @@ data = data.drop(data[data['Sport'] == 'Water Motorsports'].index)
 data = data.drop(data[data['Sport'] == 'Archery'].index)
 
 
-#data = data.query("Sport == 'Swimming'")
-                #| Sport == 'Sailing'  | Sport == 'Water Polo'  | Sport == 'Rowing'  | Sport == 'Diving' | Sport == 'Canoeing'  | Sport == 'Synchronized Swimming'  | Sport == 'Motorboating'")      
-
 current_sports = data['Sport'].unique()
 print(data.columns)
 
 data = data.dropna(subset=['Height'])
 
 
+#remove winter and male athletes
 data = data.drop(data[data['Sex'] == 'M'].index)
 data = data.drop(data[data['Season'] == 'Winter'].index)
 

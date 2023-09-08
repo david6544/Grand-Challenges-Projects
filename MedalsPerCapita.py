@@ -9,9 +9,8 @@ world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
 worldpop = pd.read_csv('world_population.csv')
 medals = pd.read_csv('athlete_events.csv')
 
-# Drop rows where Medal column is NaN
+# Comment rows out when you want to see a specific sport
 
-# Drop all but swimming and diving
 
 # Categories Aquatic
 medals.drop(medals[medals['Sport'] == 'Swimming'].index, inplace=True)
@@ -109,12 +108,9 @@ athlete_info = medals
 
 # delete repeated athletes
 medals.drop_duplicates(subset=['Name'], inplace=True) 
-#
 medals = medals.drop (medals[medals['Sex'] == 'F'].index)
 
-# drop non gold medals
-#print(medals)
-
+# clean medals
 data = medals.dropna(subset=['Medal'])
 #data.drop(data[data['Medal'] != 'Gold'].index, inplace=True)
 
@@ -170,30 +166,20 @@ athlete_info.dropna(subset=['Sex'], inplace=True)
 athlete_info.dropna(subset=['Medal'], inplace=True)
 #Only include male athletes
 athlete_info = athlete_info.drop (athlete_info[athlete_info['Sex'] == 'F'].index)
-
-# rename United States to USA in athelete_info
-
 # Filter athlete_info dataset to include only valid countries
 athlete_info_filtered = athlete_info[athlete_info['Team'].isin(valid_countries)]
-
 #only use modern data
 athlete_info_filtered = athlete_info_filtered.drop(athlete_info_filtered[athlete_info_filtered['Year'] < 1980].index)
-
 # Calculate average height and weight for each country
 average_height_weight = athlete_info_filtered.groupby('Team')[['Height','Weight']].mean()
-
 #sort by their position in medal ratio
 average_height_weight = average_height_weight.reindex(ratio.index)
-
 print(average_height_weight.head(20))
-
 average_height_weight.dropna(subset=['Height'], inplace=True)
-
 print(average_height_weight.head(15))
 #average_height_weight = average_height_weight.head(10)
-#average BMI
+#calc BMI
 bmi = average_height_weight['Weight'] / (average_height_weight['Height'] / 100) ** 2
-
 x = np.arange(len(bmi))
 slope, intercept = np.polyfit(x, bmi, 1)
 
