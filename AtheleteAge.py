@@ -45,7 +45,7 @@ data = data.dropna(subset=['Age'])
 data = data.dropna(subset=['Medal'])
 #drop winter
 data = data.drop(data[data['Season'] == 'Winter'].index)
-data = data.drop(data[data['Sex'] != 'F'].index)
+#data = data.drop(data[data['Sex'] != 'F'].index)
 
 
 data_current_sports = data[data['Sport'].isin(current_sports)]
@@ -61,6 +61,8 @@ trend_line = slope * x + intercept
 #print the oldest athletes
 print(data_current_sports.sort_values(by=['Age'], ascending=False).head(10))
 
+
+
 # Plot the average age over time for all sports with the trend line
 plt.figure(figsize=(10, 6))
 plt.plot(x, y, label='Average Age')
@@ -68,9 +70,11 @@ plt.plot(x, trend_line, linestyle='--', label='Trend Line')
 plt.axvline(x=1916, color='red', linestyle=':', label='Year 1918')
 plt.axvline(x=1940, color='blue', linestyle=':', label='Year 1940')
 plt.title('Average Age Over Time for All Sports with Trend Line')
+
+#only show ages between 20 and 30
+#plt.ylim(20, 30)
 plt.xlabel('Year')
 plt.ylabel('Average Age')
-plt.ylim(20, 30)
 plt.legend()
 plt.tight_layout()
 plt.show()

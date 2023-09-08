@@ -14,7 +14,7 @@ medals = pd.read_csv('athlete_events.csv')
 # Drop all but swimming and diving
 
 # Categories Aquatic
-#medals.drop(medals[medals['Sport'] == 'Swimming'].index, inplace=True)
+medals.drop(medals[medals['Sport'] == 'Swimming'].index, inplace=True)
 medals.drop(medals[medals['Sport'] == 'Sailing' ].index, inplace=True)
 medals.drop(medals[medals['Sport'] == 'Water Polo' ].index, inplace=True)
 medals.drop(medals[medals['Sport'] == 'Rowing' ].index, inplace=True)
@@ -105,13 +105,7 @@ medals.drop(medals[medals['Sport'] == 'Alpinism' ].index, inplace=True)
 medals.drop(medals[medals['Sport'] == 'Basque Pelota' ].index, inplace=True)
 medals.drop(medals[medals['Sport'] == 'Aeronautics'].index, inplace=True)
 
-#rename United States to Untited States of America in Team
-medals['Team'] = medals['Team'].replace(['United States'], 'United States of America')
-
-
-
 athlete_info = medals
-
 
 # delete repeated athletes
 medals.drop_duplicates(subset=['Name'], inplace=True) 
@@ -145,6 +139,8 @@ ratio = ratio[ratio.index.isin(valid_countries)]
 ratio.rename(index={'United States': 'United States of America'}, inplace=True)
 
 #Rename united States to USA
+
+#change the value of US to 24
 
 # Merge medalist ratio data with world map data
 world = world.merge(ratio, how='left', left_on='name', right_index=True)

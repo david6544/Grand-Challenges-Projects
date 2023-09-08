@@ -52,6 +52,7 @@ y = avg_age_by_year.values
 slope, intercept, r_value, p_value, std_err = linregress(x, y)
 trend_line = slope * x + intercept
 
+
 # Plot the average age over time for all sports with the trend line
 plt.figure(figsize=(10, 6))
 plt.plot(x, y, label='Average Weight')

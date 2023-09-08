@@ -57,8 +57,6 @@ trend_line = slope * x + intercept
 plt.figure(figsize=(10, 6))
 plt.plot(x, y, label='Average Height')
 plt.plot(x, trend_line, linestyle='--', label='Trend Line')
-plt.axvline(x=1918, color='red', linestyle=':', label='Year 1918')
-plt.axvline(x=1940, color='blue', linestyle=':', label='Year 1940')
 plt.title('Average Height Over Time for All Sports with Trend Line')
 plt.xlabel('Year')
 plt.ylabel('Average Height')
